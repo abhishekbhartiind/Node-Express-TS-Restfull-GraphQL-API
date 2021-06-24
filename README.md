@@ -38,7 +38,7 @@ Node MVC pattern, application and its development are divided into three interco
 * Step 7: After finsh intsallation rum cmd  -- (yarn start)
 
 # Deployment architecture
-Following choice are : 
-1) Servelesss deployment on firebase 
+1) Servelesss deployment on firebase - or
 2) AWS ready for go setup 
 3) CI/CD pipline support for Jenkins.
+
