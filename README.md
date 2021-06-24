@@ -29,13 +29,13 @@ Node MVC pattern, application and its development are divided into three interco
 25) Highly scalable folder architecture
 
 # Installation guide and basic setup
-Step 1: Download Node.js Installer -- (https://nodejs.org/en/download/)
-Step 2: Install Node.js and NPM from Browser
-Step 3: Verify Installation -- (node -v , npm -v)
-Step 4: Install yarn package manger -- (npm i -g yarn)
-Step 5: Verify Installation -- (yarn -v)
-Step 6: Nevigate to project forlder in terminal run cmd -- (yarn)
-Step 7: After finsh intsallation rum cmd  -- (yarn start)
+* Step 1: Download Node.js Installer -- (https://nodejs.org/en/download/)
+* Step 2: Install Node.js and NPM from Browser
+* Step 3: Verify Installation -- (node -v , npm -v)
+* Step 4: Install yarn package manger -- (npm i -g yarn)
+* Step 5: Verify Installation -- (yarn -v)
+* Step 6: Nevigate to project forlder in terminal run cmd -- (yarn)
+* Step 7: After finsh intsallation rum cmd  -- (yarn start)
 
 # Deployment architecture
 Following choice are : 
