@@ -37,11 +37,12 @@ In MVC pattern, application and its development are divided into three interconn
 * Step 3: Verify Installation -- (node -v , npm -v)
 * Step 4: Install yarn package manger -- (npm i -g yarn)
 * Step 5: Verify Installation -- (yarn -v)
-* Step 6: Nevigate to project forlder in terminal run cmd -- (yarn)
-* Step 7: After finsh intsallation rum cmd  -- (yarn start)
+* Step 6: Navigate to project folder in terminal run cmd -- (yarn)
+* Step 7: After finish installation rum cmd -- (yarn start)
 
 # Deployment architecture
-1) Servelesss deployment on firebase - or
-2) AWS ready for go setup 
-3) CI/CD pipline support for Jenkins.
+* Serverlesss deployment on firebase - or
+* AWS ready for go setup
+* CI/CD pipeline support for Jenkins.
+
 
