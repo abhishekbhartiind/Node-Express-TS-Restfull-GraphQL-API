@@ -1,5 +1,3 @@
-node_modules
-
 # Logs
 logs
 *.log
@@ -42,6 +40,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+server.key
+server.cert
 
 # TypeScript v1 declaration files
 typings/

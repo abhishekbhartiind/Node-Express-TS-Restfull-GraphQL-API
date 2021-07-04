@@ -6,13 +6,13 @@ mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 dotenv.config();
 
-const URI = process.env.noSqlUrl || "";
+export const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.icdhe.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 
 const NoSql: any = async () => {
   let message: any;
   let error: any;
   await mongoose
-    .connect(URI, {
+    .connect(MONGODB_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     })
