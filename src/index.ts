@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import csurf from "csurf";
 import https from "https";
 import morgan from "morgan";
 import helmet from "helmet";
@@ -8,32 +9,46 @@ import * as dotenv from "dotenv";
 import flash from "connect-flash";
 import bodyParser from "body-parser";
 import compression from "compression";
+import session from "express-session";
 import cookieParser from "cookie-parser";
-import NoSql, { MONGODB_URI } from "./configuration/dataBase/NoSqlService";
+import { NoSql, store } from "./configuration/dataBase/NoSqlService";
 import sequelize from "./configuration/dataBase/SqlService";
 import * as errorController from "./controllers/defaultController/error";
 
 //Step 1: Set the node  with express with port, key  and log
-const app = express();
 dotenv.config();
+
+const app = express();
+const csrf = csurf();
+const sessionId = process.env.session_Id || "";
 const PORT = process.env.PORT || 3000;
+
+// const privateKey = fs.readFileSync("server.key");
+// const certificate = fs.readFileSync("server.cert");
+
 const accessLogSterm = fs.createWriteStream(
   path.join(__dirname, "configuration", "Application_Log", "access.log"),
   { flags: "a" }
 );
 
-// const privateKey = fs.readFileSync("server.key");
-// const certificate = fs.readFileSync("server.cert");
-
 //Step 2: Set app middleware
+app.use(csrf);
+app.use(flash());
 app.use(helmet());
 app.use(compression());
-app.use(flash());
-app.use(morgan("combined", { stream: accessLogSterm }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "views")));
+app.use(morgan("combined", { stream: accessLogSterm }));
+app.use(
+  session({
+    secret: sessionId,
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  })
+);
 
 //Setp 3: Setup DB connection
 /* NoSql -> Mongo DB */
@@ -84,6 +99,10 @@ app.use(errorController.get404);
 //     console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
 //   });
 //--> run application by http
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
+});
+const io = require("socket.io")(server);
+io.on("connection", (socket: any) => {
+  console.log("Socket client connected");
 });
