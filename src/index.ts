@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-import csurf from "csurf";
 import https from "https";
 import morgan from "morgan";
 import helmet from "helmet";
@@ -9,17 +8,21 @@ import * as dotenv from "dotenv";
 import flash from "connect-flash";
 import bodyParser from "body-parser";
 import compression from "compression";
-import session from "express-session";
 import cookieParser from "cookie-parser";
-import { NoSql, store } from "./configuration/dataBase/NoSqlService";
 import sequelize from "./configuration/dataBase/SqlService";
+import { NoSql, store } from "./configuration/dataBase/NoSqlService";
 import * as errorController from "./controllers/defaultController/error";
+
+// call custom routes
+import authRout from "./routs/authRouts/auth";
 
 //Step 1: Set the node  with express with port, key  and log
 dotenv.config();
 
 const app = express();
-const csrf = csurf();
+//const csurf = require("csurf");
+const session = require("express-session");
+//const csrf = csurf();
 const sessionId = process.env.session_Id || "";
 const PORT = process.env.PORT || 3000;
 
@@ -32,8 +35,6 @@ const accessLogSterm = fs.createWriteStream(
 );
 
 //Step 2: Set app middleware
-app.use(csrf);
-app.use(flash());
 app.use(helmet());
 app.use(compression());
 app.use(cookieParser());
@@ -49,6 +50,8 @@ app.use(
     store: store,
   })
 );
+//app.use(csrf({ cookie: { key: "XSRF-TOKEN" } }));
+app.use(flash());
 
 //Setp 3: Setup DB connection
 /* NoSql -> Mongo DB */
@@ -88,6 +91,7 @@ app.use(function (req, res, next) {
 });
 
 //Setp 6: Set custom routs of our entier project
+app.use(authRout);
 app.get("/500", errorController.get500);
 app.use(errorController.get404);
 

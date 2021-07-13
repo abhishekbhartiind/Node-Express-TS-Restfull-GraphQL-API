@@ -31,6 +31,10 @@ const userSchema = new Schema(
       required: true,
       max: 20,
     },
+    password: {
+      type: String,
+      required: true,
+    },
     accessType: {
       type: String,
       trim: true,
@@ -39,10 +43,11 @@ const userSchema = new Schema(
     },
     profile: {
       type: String,
-      required: true,
+      required: false,
     },
     about: {
       type: String,
+      required: false,
     },
     photo: {
       data: Buffer,
@@ -51,18 +56,6 @@ const userSchema = new Schema(
     resetPasswordLink: {
       data: String,
       default: "",
-    },
-    cart: {
-      items: [
-        {
-          productId: {
-            type: Schema.Types.ObjectId,
-            ref: "Product",
-            required: true,
-          },
-          quantity: { type: Number, required: true },
-        },
-      ],
     },
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updatedAt" } }

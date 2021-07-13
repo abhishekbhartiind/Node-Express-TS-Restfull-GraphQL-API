@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import session from "express-session";
-import MongoDbSession from "connect-mongodb-session";
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 dotenv.config();
 
+const MongoDbSession = require("connect-mongodb-session");
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.icdhe.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
 
 const mongoStore = MongoDbSession(session);
