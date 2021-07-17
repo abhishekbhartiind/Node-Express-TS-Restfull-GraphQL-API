@@ -15,6 +15,7 @@ import * as errorController from "./controllers/defaultController/error";
 
 // call custom routes
 import authRout from "./routs/authRouts/auth";
+import userRout from "./routs/authRouts/userRout";
 
 //Step 1: Set the node  with express with port, key  and log
 dotenv.config();
@@ -92,6 +93,7 @@ app.use(function (req, res, next) {
 
 //Setp 6: Set custom routs of our entier project
 app.use(authRout);
+app.use(userRout);
 app.get("/500", errorController.get500);
 app.use(errorController.get404);
 
