@@ -17,16 +17,15 @@ export const signIn = (request: any, response: any) => {
   User.findOne({ email: email })
     .then((user: any) => {
       if (!user) {
-        return returnType(response, 400, eUserError.user400, null);
+        return returnType(response, 404, eUserError.user404, "", true);
       }
       logedUser = user;
       return bcrypt.compare(password, user?.password);
     })
     .then((isEqual: any) => {
       if (!isEqual) {
-        return returnType(response, 401, eUserError.user401, null);
+        return returnType(response, 401, eUserError.user401);
       }
-
       const token = jwt.sign(
         {
           userId: logedUser["_id"],
@@ -40,13 +39,8 @@ export const signIn = (request: any, response: any) => {
       response.cookie("token", token, { expiresIn: "1d", httpOnly: true });
       return returnType(response, 200, "SignIn Success!", { token });
     })
-    .catch((err) => {
-      return returnType(
-        response,
-        500,
-        eApiErrorMessages.apiNoClueError_0,
-        null
-      );
+    .catch((err: any) => {
+      return returnType(response, 500, eApiErrorMessages.apiNoClueError_0, err);
     });
 };
 
@@ -54,7 +48,7 @@ export const signUp = (request: any, response: any) => {
   // find user exist or not
   User.findOne({ email: request.body.email }).exec((err, user) => {
     if (user) {
-      return returnType(response, 400, eUserError.user400, null);
+      return returnType(response, 404, eUserError.user404, "", true);
     }
   });
 

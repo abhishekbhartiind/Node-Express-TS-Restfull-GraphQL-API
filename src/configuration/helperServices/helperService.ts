@@ -1,10 +1,17 @@
 export const returnType = (
   response: any,
-  stausType = 200,
+  statusType = 200,
   message = "",
-  data?: any
+  data?: any,
+  throwError: boolean = false
 ) => {
-  return response.status(stausType).json({ message, data });
+  if (!throwError) {
+    return response.status(statusType).json({ message, data });
+  } else {
+    const error: any = new Error();
+    error.statusCode = statusType + " " + message;
+    throw error;
+  }
 };
 
 // const strip_api_key = process.env.STRIP_API_KEY;

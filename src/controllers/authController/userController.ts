@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 export const userCreate = (request: any, response: any) => {
   User.findOne({ email: request.body.email }).exec((err, user) => {
     if (user) {
-      return returnType(response, 400, eUserError.user400, null);
+      return returnType(response, 404, eUserError.user404, "", true);
     }
   });
 
@@ -36,9 +36,6 @@ export const userCreate = (request: any, response: any) => {
       return returnType(response, 201, "User created", result._id);
     })
     .catch((error: any) => {
-      if (!error.statusCode) {
-        error.statusCode = 500;
-      }
       return returnType(
         response,
         500,
@@ -49,8 +46,8 @@ export const userCreate = (request: any, response: any) => {
 };
 
 export const userRead = (request: any, response: any) => {
-  const currentPage = request.query.page || 1;
-  const perPage = request.query.pageSize || 5;
+  const currentPage = +request?.query?.page || 1;
+  const perPage = +request?.query?.pageSize || 5;
   let totalItems: any;
   User.find()
     .countDocuments()
@@ -61,37 +58,52 @@ export const userRead = (request: any, response: any) => {
         .limit(perPage);
     })
     .then((user) => {
+      let mapUser = user?.map((x: any) => {
+        return {
+          _id: x._id,
+          name: x.name,
+          email: x.email,
+          profile: x.profile,
+          username: x.username,
+          phone: x.phone,
+          accessType: x.accesType,
+        };
+      });
       return response.status(200).json({
         message: "Fetched user successfully.",
-        users: user,
+        users: mapUser,
         pageNo: currentPage,
         totalItems: totalItems,
       });
     })
     .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      return response
-        .status(500)
-        .json({ message: eApiErrorMessages.api500Error });
+      return returnType(response, 500, eApiErrorMessages.apiNoClueError_0, err);
     });
 };
 
 export const userReadbyId = (request: any, response: any) => {
   const userId = request.params.userId;
-  User.findById(userId)
-    .then((user) => {
+  User.findById({ _id: userId })
+    .then((user: any) => {
       if (!user) {
-        return returnType(response, 404, eUserError.user404);
+        return returnType(response, 404, eUserError.user404, "", true);
       }
-      return returnType(response, 200, `User find by _id ${userId}!!`, user);
+      user = [user];
+      let mapUser = user?.map((x: any) => {
+        return {
+          _id: x._id,
+          name: x.name,
+          email: x.email,
+          profile: x.profile,
+          username: x.username,
+          phone: x.phone,
+          accessType: x.accesType,
+        };
+      });
+      return returnType(response, 200, `User find by _id ${userId}!!`, mapUser);
     })
     .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      return returnType(response, 500, eApiErrorMessages.api500Error);
+      return returnType(response, 500, eApiErrorMessages.api500Error, err);
     });
 };
 
@@ -99,10 +111,10 @@ export const userUpdateById = (request: any, response: any) => {
   const userId = request.params.userId;
   const { username, name, email, phone, accessType, about, photo } =
     request.body;
-  User.findOne(userId)
+  User.findOne({ _id: userId })
     .then((user: any) => {
       if (!user) {
-        return returnType(response, 404, eUserError.user404);
+        return returnType(response, 404, eUserError.user404, "", true);
       }
       user.username = username;
       user.name = name;
@@ -118,9 +130,6 @@ export const userUpdateById = (request: any, response: any) => {
       return returnType(response, 200, "User update successfully!", result);
     })
     .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       return returnType(response, 500, eApiErrorMessages.api500Error, err);
     });
 };
@@ -129,17 +138,17 @@ export const userUpdatePassword = (request: any, response: any) => {
   const userId = request.params.userId;
   const { oldPassowrd, newPassword } = request.body;
   let userData: any;
-  User.findOne(userId)
+  User.findOne({ _id: userId })
     .then((user: any) => {
       if (!user) {
-        return returnType(response, 404, eUserError.user404);
+        return returnType(response, 404, eUserError.user404, "", true);
       }
       userData = user;
-      return bcrypt.compare(oldPassowrd, user?.password);
+      return bcrypt.compare(oldPassowrd, user.password);
     })
     .then((isEqual) => {
       if (!isEqual) {
-        return returnType(response, 401, eUserError.user401, null);
+        return returnType(response, 401, eUserError.user401, null, true);
       }
       return bcrypt.hash(newPassword, 12);
     })
@@ -148,17 +157,9 @@ export const userUpdatePassword = (request: any, response: any) => {
       return userData.save();
     })
     .then((result) => {
-      return returnType(
-        response,
-        200,
-        "User password change successfully!",
-        null
-      );
+      return returnType(response, 200, "User password change successfully!");
     })
     .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       return returnType(response, 500, eApiErrorMessages.api500Error, err);
     });
 };
@@ -174,19 +175,16 @@ export const userDelete = (request: any, response: any) => {
       return returnType(response, 200, `Users removed!!`);
     })
     .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       return returnType(response, 500, eApiErrorMessages.api500Error, err);
     });
 };
 
 export const userDeleteById = (request: any, response: any) => {
   const userId = request.params.userId;
-  User.findById(userId)
+  User.findById({ _id: userId })
     .then((user) => {
       if (!user) {
-        return returnType(response, 404, eUserError.user404);
+        return returnType(response, 404, eUserError.user404, "", true);
       }
       return User.findByIdAndRemove(userId);
     })
@@ -194,9 +192,6 @@ export const userDeleteById = (request: any, response: any) => {
       return returnType(response, 200, `User _id ${userId} removed!!`);
     })
     .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       return returnType(response, 500, eApiErrorMessages.api500Error, err);
     });
 };

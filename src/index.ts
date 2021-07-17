@@ -30,10 +30,27 @@ const PORT = process.env.PORT || 3000;
 // const privateKey = fs.readFileSync("server.key");
 // const certificate = fs.readFileSync("server.cert");
 
-const accessLogSterm = fs.createWriteStream(
-  path.join(__dirname, "configuration", "Application_Log", "access.log"),
-  { flags: "a" }
-);
+// create log for application
+try {
+  const PathRout = path.join(
+    __dirname,
+    "configuration",
+    "Application_Log",
+    "access.log"
+  );
+  let accessLogSterm: any;
+  if (fs.existsSync(PathRout)) {
+    accessLogSterm = fs.createWriteStream(PathRout, { flags: "a" });
+  } else {
+    accessLogSterm = fs.writeFileSync(
+      PathRout,
+      `log file create on ${new Date()}\n`
+    );
+  }
+  app.use(morgan("combined", { stream: accessLogSterm }));
+} catch (err) {
+  console.error(err);
+}
 
 //Step 2: Set app middleware
 app.use(helmet());
@@ -42,7 +59,6 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "views")));
-app.use(morgan("combined", { stream: accessLogSterm }));
 app.use(
   session({
     secret: sessionId,
