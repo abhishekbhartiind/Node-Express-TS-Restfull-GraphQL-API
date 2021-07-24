@@ -25,6 +25,21 @@ describe("Auth middleware", () => {
     expect(tokenVerify.bind(this, req, {}, () => {})).to.throw();
   });
 
+  it("should yield a userId after decoding the token", function () {
+    const req = {
+      get: function (headerName: any) {
+        return "Bearer djfkalsdjfaslfjdlas";
+      },
+    };
+    sinon.stub(jwt, "verify");
+    jwt.verify.returns({ userId: "abc" });
+    tokenVerify(req, {}, () => {});
+    expect(req).to.have.property("userId");
+    expect(req).to.have.property("userId", "abc");
+    expect(jwt.verify.called).to.be.true;
+    jwt.verify.restore();
+  });
+
   it("should throw an erro if  authoriztion token not verify", () => {
     const req = {
       get: function (headerName: any) {
@@ -32,18 +47,5 @@ describe("Auth middleware", () => {
       },
     };
     expect(tokenVerify.bind(this, req, {}, () => {})).to.throw("jwt malformed");
-  });
-
-  it("should yield a userId after decoding the token", () => {
-    const req: any = {
-      get: (headerName: any) => {
-        return "Bearer adsfafasfasfasfasfasfafs";
-      },
-    };
-    sinon.stub(jwt, "verify");
-    jwt.verify.returns({ userId: "abc" });
-    expect(tokenVerify.bind(this, req, {}, () => {})).to.not.throw();
-    expect(jwt.verify.called).to.have.true;
-    jwt.verify.restore();
   });
 });
