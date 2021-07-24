@@ -1,8 +1,8 @@
+import sinon from "sinon";
 import { expect } from "chai";
 import { tokenVerify } from "../middleware/is-auth";
 
 const jwt = require("jsonwebtoken");
-const sinon = require("sinon");
 
 describe("Auth middleware", () => {
   it("should throw an erro if no authoriztion header is present", () => {

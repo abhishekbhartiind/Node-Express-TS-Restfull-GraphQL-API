@@ -10,11 +10,28 @@ dotenv.config();
 const jwtSecreat = process.env.JWT_SECREATE || "";
 const bcrypt = require("bcrypt");
 
-export const signIn = (request: any, response: any) => {
+export const getUserStatus = async (request: any, response: any, next: any) => {
+  try {
+    const user: any = await User.findById(request.userId);
+    if (!user) {
+      const error: any = new Error("User not found.");
+      error.statusCode = 404;
+      throw error;
+    }
+    response.status(200).json({ status: user.status });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+export const signIn = async (request: any, response: any) => {
   const email = request.body.email;
   const password = request.body.password;
   let logedUser: any;
-  User.findOne({ email: email })
+  await User.findOne({ email: email })
     .then((user: any) => {
       if (!user) {
         return returnType(response, 404, eUserError.user404, "", true);
