@@ -3,12 +3,13 @@ import path from "path";
 import https from "https";
 import morgan from "morgan";
 import helmet from "helmet";
-import express from "express";
+import express, { response } from "express";
 import * as dotenv from "dotenv";
 import flash from "connect-flash";
 import bodyParser from "body-parser";
 import compression from "compression";
 import cookieParser from "cookie-parser";
+import { graphqlHTTP } from "express-graphql";
 import sequelize from "./configuration/dataBase/SqlService";
 import { NoSql, store } from "./configuration/dataBase/NoSqlService";
 import * as errorController from "./controllers/defaultController/error";
@@ -16,6 +17,9 @@ import * as errorController from "./controllers/defaultController/error";
 // call custom routes
 import authRout from "./routs/authRouts/auth";
 import userRout from "./routs/authRouts/userRout";
+
+import graphqlSchema from "./GraphQL/schema";
+import graphqlResolver from "./GraphQL/resolver";
 
 //Step 1: Set the node  with express with port, key  and log
 dotenv.config();
@@ -107,11 +111,24 @@ app.use(function (req, res, next) {
   next();
 });
 
+//step 6: optional set grpahql
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: graphqlSchema,
+    rootValue: graphqlResolver,
+    graphiql: true,
+  })
+);
+
 //Setp 6: Set custom routs of our entier project
 app.use(authRout);
 app.use(userRout);
 app.get("/500", errorController.get500);
 app.use(errorController.get404);
+app.use((error: any, request: any, respone: any) => {
+  response.redirect("/500");
+});
 
 //step 7: start the app on configure port
 //--> run application by https
@@ -121,9 +138,11 @@ app.use(errorController.get404);
 //     console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
 //   });
 //--> run application by http
+
 const server = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
 });
+
 const io = require("socket.io")(server);
 io.on("connection", (socket: any) => {
   console.log("Socket client connected");

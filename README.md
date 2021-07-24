@@ -52,3 +52,25 @@ In MVC pattern, application and its development are divided into three interconn
 # Genrate self sign Open SSl Certificate CMD
 
 - openssl req -nodes -new -x509 -keyout server.key -out server.cert -days 365
+
+# Environment variable need to require for run this application
+
+1. PORT
+2. NODE_ENV
+3. appName
+4. SENDGRID_API_KEY
+5. STRIP_API_KEY
+6. session_Id
+7. MONGO_USER
+8. MONGO_PASSWORD
+9. MONGO_DEFAULT_DATABASE
+10. JWT_SECREATE
+11. CLIENT_URL
+12. SQL_DB_Name
+13. SQL_Username
+14. SQL_password
+15. SQL_dialect
+16. SQL_Host
+17. BUCKET_NAME
+18. IAM_USER_KEY
+19. IAM_USER_SECRET

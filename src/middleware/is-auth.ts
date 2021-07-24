@@ -4,9 +4,14 @@ import { eApiErrorMessages } from "../models/enum/auth_enum";
 dontenv.config();
 
 export const tokenVerify = (request: any, response: any, next: any) => {
-  const token = request.get("Authoriztion").split(" ")[1];
+  const token = request.get("Authoriztion")?.split(" ")[1];
   const jwt_secreat = process.env.JWT_SECREATE || "";
   let decodedToken: any;
+
+  if (!token) {
+    throw new Error("Token is not present in header");
+  }
+
   try {
     decodedToken = jwt.verify(token, jwt_secreat);
   } catch (error: any) {

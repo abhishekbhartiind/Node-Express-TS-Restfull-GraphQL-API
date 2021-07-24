@@ -72,6 +72,11 @@ export const userRead = (request: any, response: any) => {
       return response.status(200).json({
         message: "Fetched user successfully.",
         users: mapUser,
+        hasNextPage: perPage * currentPage < totalItems,
+        hasPreviousPage: currentPage > 1,
+        nextPage: currentPage + 1,
+        previousPage: currentPage - 1,
+        lastPage: Math.ceil(totalItems / perPage),
         pageNo: currentPage,
         totalItems: totalItems,
       });
