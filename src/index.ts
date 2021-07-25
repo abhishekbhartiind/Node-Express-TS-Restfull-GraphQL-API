@@ -101,7 +101,7 @@ app.set("view engine", "ejs");
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 //Set 5: Set app default headers for resole cors error
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -117,7 +117,12 @@ app.use(
   graphqlHTTP({
     schema: graphqlSchema,
     rootValue: graphqlResolver,
-    graphiql: true,
+    graphiql: false,
+    formatError(err: any) {
+      if (!err.originalError) {
+        return err;
+      }
+    },
   })
 );
 
