@@ -74,3 +74,5 @@ In MVC pattern, application and its development are divided into three interconn
 17. BUCKET_NAME
 18. IAM_USER_KEY
 19. IAM_USER_SECRET
+20. FRONT_END_URL
+21. FROM (your send from email id)

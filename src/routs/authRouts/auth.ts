@@ -3,6 +3,8 @@ import {
   signIn,
   signUp,
   signOut,
+  sendResetPassowrdLink,
+  resetPassowrd,
 } from "../../controllers/authController/authControler";
 import {
   userSignupValidator,
@@ -14,6 +16,8 @@ const router = express.Router();
 
 router.post("/signIn", userSignInValidator, runValidation, signIn);
 router.post("/signUp", userSignupValidator, runValidation, signUp);
+router.post("/sendResetPassowrdLink", sendResetPassowrdLink);
+router.post("/resetPassword/:token", resetPassowrd);
 router.post("/signOut", signOut);
 
 export default router;

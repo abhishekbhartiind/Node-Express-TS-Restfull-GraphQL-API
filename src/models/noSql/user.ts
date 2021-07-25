@@ -53,10 +53,8 @@ const userSchema = new Schema(
       data: Buffer,
       contentType: String,
     },
-    resetPasswordLink: {
-      data: String,
-      default: "",
-    },
+    resetToken: String,
+    resetTokenExpiration: Date,
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updatedAt" } }
 );

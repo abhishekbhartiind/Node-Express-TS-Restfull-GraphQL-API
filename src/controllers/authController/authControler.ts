@@ -5,6 +5,7 @@ import * as dotenv from "dotenv";
 import User from "../../models/noSql/user";
 import { eApiErrorMessages, eUserError } from "../../models/enum/auth_enum";
 import { returnType } from "../../configuration/helperServices/helperService";
+import sendMailServices from "../../configuration/helperServices/emailService";
 
 dotenv.config();
 const jwtSecreat = process.env.JWT_SECREATE || "";
@@ -112,12 +113,76 @@ export const signOut = (request: any, response: any) => {
   });
 };
 
-export const resetPassowrd = (request: any, response: any) => {
+export const sendResetPassowrdLink = (request: any, response: any) => {
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
-      return err;
+      return returnType(response, 500, eApiErrorMessages.apiNoClueError_0, err);
     }
     const token = buffer.toString("hex");
-    User.findOne();
+    User.findOne({ email: request.body.email })
+      .then((user: any) => {
+        if (!user) {
+          return returnType(response, 404, eUserError.user404, err);
+        }
+        user.resetToken = token;
+        user.resetTokenExpiration = Date.now() + 3600000;
+        return user.save();
+      })
+      .then((result) => {
+        sendMailServices(
+          request.body.email,
+          "Password reset",
+          `
+        <p>You requested a password reset</p>
+        <p>Click this <a href="${process.env.FRONT_END_URL}/resetPassword/${token}">link</a> to set a new password.</p>
+      `
+        )
+          .then((result) => {
+            return returnType(
+              response,
+              200,
+              "Reset password link sent to your email",
+              {
+                resetToken: token,
+              }
+            );
+          })
+          .catch((error: any) => {
+            return returnType(
+              response,
+              500,
+              eApiErrorMessages.apiNoClueError_1,
+              err
+            );
+          });
+      })
+      .catch((err) => {
+        return returnType(
+          response,
+          500,
+          eApiErrorMessages.apiNoClueError_0,
+          err
+        );
+      });
   });
+};
+
+export const resetPassowrd = (request: any, response: any) => {
+  const token = request.params.token;
+  let userData: any;
+  User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+    .then((user) => {
+      userData = user;
+      return bcrypt.hash(request.body.password, 12);
+    })
+    .then((hashPass) => {
+      userData.password = hashPass;
+      return userData.save();
+    })
+    .then((result) => {
+      return returnType(response, 200, "User password change successfully!");
+    })
+    .catch((err) => {
+      return returnType(response, 500, eApiErrorMessages.apiNoClueError_0, err);
+    });
 };
