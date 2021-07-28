@@ -17,6 +17,7 @@ import * as errorController from "./controllers/defaultController/error";
 // call custom routes
 import authRout from "./routs/authRouts/auth";
 import userRout from "./routs/authRouts/userRout";
+import productRout from "./routs/productRouts/productRout";
 
 import graphqlSchema from "./GraphQL/schema";
 import graphqlResolver from "./GraphQL/resolver";
@@ -104,21 +105,33 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
   res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+  res
+    .header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    )
+    .set(
+      "Content-Security-Policy",
+      "default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'"
+    );
   next();
 });
 
 //step 6: optional set grpahql
 app.use(
+  helmet({
+    contentSecurityPolicy:
+      process.env.NODE_ENV === "production" ? undefined : false,
+  })
+);
+
+app.use(
   "/graphql",
   graphqlHTTP({
     schema: graphqlSchema,
     rootValue: graphqlResolver,
-    graphiql: false,
-    formatError(err: any) {
+    graphiql: true,
+    customFormatErrorFn(err: any) {
       if (!err.originalError) {
         return err;
       }
@@ -129,6 +142,7 @@ app.use(
 //Setp 6: Set custom routs of our entier project
 app.use(authRout);
 app.use(userRout);
+app.use(productRout);
 app.get("/500", errorController.get500);
 app.use(errorController.get404);
 app.use((error: any, request: any, respone: any) => {

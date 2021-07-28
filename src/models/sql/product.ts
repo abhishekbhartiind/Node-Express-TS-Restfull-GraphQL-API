@@ -1,4 +1,4 @@
-import Sequelize from "sequelize";
+import * as Sequelize from "sequelize";
 import sequelize from "../../configuration/dataBase/SqlService";
 
 const Product = sequelize.define("product", {
