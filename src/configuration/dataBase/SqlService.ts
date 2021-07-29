@@ -18,6 +18,7 @@ const sequelize = new Sequelize(
   {
     dialect: sqlConfig.dialect as any,
     host: sqlConfig.host,
+    logging: false,
   }
 );
 

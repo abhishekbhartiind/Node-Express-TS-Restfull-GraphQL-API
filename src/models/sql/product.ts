@@ -21,6 +21,22 @@ const Product = sequelize.define("product", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  isAvailable: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+  },
+  rating: {
+    type: Sequelize.DOUBLE,
+    allowNull: true,
+  },
+  qty: {
+    type: Sequelize.DOUBLE,
+    allowNull: true,
+  },
+  userId: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
 });
 
 export default Product;
