@@ -37,7 +37,12 @@ export const addProduct = (request: any, response: any) => {
 };
 
 export const fetchProduct = (request: any, response: any) => {
-  Product.findAll()
+  const curPage = +request?.query?.page || 1;
+  const pageSize = +request?.query?.pageSize || 5;
+  Product.findAndCountAll({
+    limit: pageSize,
+    offset: curPage,
+  })
     .then((result: any) => {
       return returnType(response, 200, "Product fetch successfuly!", result);
     })
@@ -53,11 +58,7 @@ export const fetchProduct = (request: any, response: any) => {
 
 export const fetchProductById = (request: any, response: any) => {
   const id = request.params.id;
-  Product.findAll({
-    where: {
-      id,
-    },
-  })
+  Product.findByPk(id)
     .then((result: any) => {
       return returnType(response, 200, "Product fetch successfuly!", result);
     })
