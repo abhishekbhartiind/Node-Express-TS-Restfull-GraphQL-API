@@ -1,6 +1,9 @@
+import fs from "fs";
 import Product from "../../models/sql/product";
 import { returnType } from "../../configuration/helperServices/helperService";
 import { eApiErrorMessages } from "../../models/enum/auth_enum";
+
+const pdfKit = require("pdfkit");
 
 export const addProduct = (request: any, response: any) => {
   const {
@@ -127,4 +130,65 @@ export const deleteProductById = (request: any, response: any) => {
         error
       );
     });
+};
+
+export const addImage = (request: any, response: any) => {
+  const image = request.file;
+  if (!image) {
+    return returnType(response, 500, "Please upload correct file");
+  }
+  return returnType(response, 200, "Image save on server", image);
+};
+
+export const downloadImage = (request: any, response: any) => {
+  const imageId = request.params.id;
+  try {
+    const file = fs.createReadStream(`assets/images/${imageId}`);
+    response.setHeader("Content-Type", "application/image");
+    response.setHeader("Content-Disposition", "inline");
+    file.pipe(response);
+  } catch (err: any) {
+    return returnType(response, 500, eApiErrorMessages.apiNoClueError_0, err);
+  }
+};
+
+export const deleteImage = (request: any, response: any) => {
+  const imageId = request.params.id;
+  try {
+    fs.unlink(`assets/images/${imageId}`, (error: any) => {
+      if (error) {
+        return returnType(
+          response,
+          500,
+          eApiErrorMessages.apiNoClueError_0,
+          error
+        );
+      } else {
+        return returnType(response, 200, "File deleted successfuly !");
+      }
+    });
+  } catch (err: any) {
+    return returnType(response, 500, eApiErrorMessages.apiNoClueError_0, err);
+  }
+};
+
+export const generatePdf = (request: any, response: any) => {
+  try {
+    const pdfId = request.params.name;
+    const pdfDoc = new pdfKit();
+    response.setHeader("Content-Type", "application/pdf");
+    response.setHeader("Content-Disposition", "inline");
+    //pdfDoc.pipe(fs.createWriteStream(`assets/pdf/${pdfId}`)); // only require to open file
+    pdfDoc.pipe(response);
+    pdfDoc.fontSize(26).text("Invoice", {
+      underline: true,
+    });
+    pdfDoc.text("-----------------------");
+    pdfDoc.fontSize(14).text("PDF create sample");
+    pdfDoc.text("-----------------------");
+    pdfDoc.end();
+    // return returnType(response, 200, "PDF Generate Successfully!");
+  } catch (err: any) {
+    return returnType(response, 500, eApiErrorMessages.apiNoClueError_0, err);
+  }
 };

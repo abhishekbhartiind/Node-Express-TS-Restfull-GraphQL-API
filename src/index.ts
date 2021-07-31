@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
-import https from "https";
 import morgan from "morgan";
+import moment from "moment";
 import helmet from "helmet";
-import express, { response } from "express";
+import express from "express";
 import * as dotenv from "dotenv";
 import flash from "connect-flash";
 import bodyParser from "body-parser";
@@ -24,13 +24,32 @@ import graphqlResolver from "./GraphQL/resolver";
 
 //Step 1: Set the node  with express with port, key  and log
 dotenv.config();
-
 const app = express();
-//const csurf = require("csurf");
-const session = require("express-session");
-//const csrf = csurf();
-const sessionId = process.env.session_Id || "";
 const PORT = process.env.PORT || 3000;
+const session = require("express-session");
+const sessionId = process.env.session_Id || "";
+// option for file upload - start
+const multer = require("multer");
+const fileStorage = multer.diskStorage({
+  destination: (req: any, file: any, cb: any) => {
+    cb(null, "assets/images");
+  },
+  filename: (req: any, file: any, cb: any) => {
+    cb(null, moment().format("DD_MM_YYYY_hh_mm_ss") + "-" + file.originalname);
+  },
+});
+const fileFilter = (req: any, file: any, cb: any) => {
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+// option for file upload - end
 
 // const privateKey = fs.readFileSync("server.key");
 // const certificate = fs.readFileSync("server.cert");
@@ -63,7 +82,11 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
+);
 app.use(express.static(path.join(__dirname, "views")));
+app.use("/assets", express.static(path.join(__dirname, "images")));
 app.use(
   session({
     secret: sessionId,
@@ -72,7 +95,6 @@ app.use(
     store: store,
   })
 );
-//app.use(csrf({ cookie: { key: "XSRF-TOKEN" } }));
 app.use(flash());
 
 //Setp 3: Setup DB connection
@@ -145,7 +167,7 @@ app.use(userRout);
 app.use(productRout);
 app.get("/500", errorController.get500);
 app.use(errorController.get404);
-app.use((error: any, request: any, respone: any) => {
+app.use((error: any, request: any, response: any) => {
   response.redirect("/500");
 });
 
