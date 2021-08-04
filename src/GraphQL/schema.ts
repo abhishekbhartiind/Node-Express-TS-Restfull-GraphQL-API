@@ -1,14 +1,39 @@
 import { buildSchema } from "graphql";
 
 export default buildSchema(`
-    type testData {
-        text: String!,
-        views: Int!
+    type Post {
+        _id: ID!
+        title: String!
+        content: String!
+        creator: String!
+        postTo: String!
+        createdAt: String!
+        updatedAt: String!
     }
+
+    input postInputData {
+        title: String!
+        content: String!
+        creator: String!
+        postTo: String!
+    }
+   
+    type PostData {
+        posts: [Post!]!
+        totalPosts: Int!
+    }
+
+    type rootMutation {
+      createPost(postInput: postInputData): Post!  
+    }
+
     type RootQuery {
-        hello: testData!
+        posts(page: Int): PostData!
+        post(id: ID!): Post!
     }
+
     schema {
-        query: RootQuery
+       query: RootQuery
+       mutation: rootMutation
     }
 `);
