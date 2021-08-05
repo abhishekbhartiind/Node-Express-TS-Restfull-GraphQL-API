@@ -161,7 +161,7 @@ app.use(
   })
 );
 
-//Setp 6: Set custom routs of our entier project
+//Setp 7: Set custom routs of our entier project
 app.use(authRout);
 app.use(userRout);
 app.use(productRout);

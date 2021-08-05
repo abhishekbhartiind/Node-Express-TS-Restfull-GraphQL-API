@@ -47,6 +47,34 @@ const resolve = {
       totalPosts: totalPosts,
     };
   },
+  updatePost: async function (args: any, req: any) {
+    const id = args?.id;
+    const post: any = await Post.findById(id).populate("creator");
+    if (!post) {
+      const error: any = new Error("No post found!");
+      error.code = 404;
+      throw error;
+    }
+
+    post.title = args.postInput.title;
+    post.content = args.postInput.content;
+    post.creator = args.postInput.creator;
+    post.postTo = args.postInput.postTo;
+
+    const updatedPost = await post.save();
+    return {
+      ...updatedPost._doc,
+      _id: updatedPost._id.toString(),
+      createdAt: updatedPost.createdAt.toISOString(),
+      updatedAt: updatedPost.updatedAt.toISOString(),
+    };
+  },
+  deletePost: async function (args: any, req: any) {
+    const id = args?.id;
+    const post: any = await Post.findById(id);
+    await Post.findByIdAndRemove(id);
+    return !!post ? true : false;
+  },
 };
 
 export default resolve;

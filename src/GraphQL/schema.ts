@@ -24,7 +24,9 @@ export default buildSchema(`
     }
 
     type rootMutation {
-      createPost(postInput: postInputData): Post!  
+      createPost(postInput: postInputData): Post! 
+      updatePost(id: ID!, postInput: postInputData): Post!
+      deletePost(id: ID!): Boolean 
     }
 
     type RootQuery {
