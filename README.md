@@ -24,13 +24,13 @@ In MVC pattern, application and its development are divided into three interconn
 16. Authentication in REST APIs
 17. xFile Upload in REST APIs
 18. Building GraphQL APIs
-19. Authentication in GraphQL APIs
+19. Building a Realtime Node.js App with Websockets
 20. File Upload in GraphQL APIs
-21. Building a Realtime Node.js App with Websockets
+21. Using TypeScript with Node.js
 22. Automated Testing (Unit Tests)
 23. Deploying a Node.js Application
-24. Using TypeScript with Node.js
-25. Highly scalable folder architecture
+24. Highly scalable folder architecture
+
 
 # Installation guide and basic setup
 
@@ -49,7 +49,7 @@ In MVC pattern, application and its development are divided into three interconn
 - AWS ready for go setup
 - CI/CD pipeline support for Jenkins.
 
-# Genrate self sign Open SSl Certificate CMD
+# Genrate self sign Open SSl Certificate
 
 - openssl req -nodes -new -x509 -keyout server.key -out server.cert -days 365
 
