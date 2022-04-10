@@ -1,0 +1,633 @@
+{
+	"info": {
+		"_postman_id": "4f80b8c5-a8ed-4802-a2fe-b185a2c9a9ee",
+		"name": "Basic Node Api ",
+		"description": "Api for personal website ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9000/signUp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"email\":\"shubham.jain05@outlook.com\",\n     \"password\":\"Admin#123\",\n     \"name\": \"Shubham Jain\",\n     \"phone\": \"+918440007759\",\n     \"accessType\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/signUp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"signUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/signIn",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"shubham.jain05@outlook.com\",\n    \"password\":\"Admin@123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/signIn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"signIn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/updateUserPassword/60ed5a14a7197b4f3ab14afd",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"oldPassowrd\":\"Admin@123\",\n     \"newPassword\":\"Admin#123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/updateUserPassword/60f2eff732022d1ea15cd0eb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"updateUserPassword",
+						"60f2eff732022d1ea15cd0eb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/readUser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Berror eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGYyZWZmNzMyMDIyZDFlYTE1Y2QwZWIiLCJlbWFpbCI6InNodWJoYW0uamFpbjA1QG91dGxvb2suY29tIiwiaWF0IjoxNjI3MTkxNjY4LCJleHAiOjE2MjcyNzgwNjh9.Jtb4_W2CrR8LK8i9vFN04vFmZEHn9LrWopA3lmQQoRI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9000/readUser?page=1&pageSize=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"readUser"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/readUser/60f2eff732022d1ea15cd0eb",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/readUser/60f2eff732022d1ea15cd0eb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"readUser",
+						"60f2eff732022d1ea15cd0eb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/userDelete/60ed5a14a7197b4f3ab14afd",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/userDelete/60ed5a14a7197b4f3ab14afd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"userDelete",
+						"60ed5a14a7197b4f3ab14afd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/updateUser/60f2eff732022d1ea15cd0eb",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n    \"username\": \"shubham.jain05\",\n    \"name\":\"Shubham Jain\",\n    \"email\": \"shubham.jain05@outlook.com\",\n    \"phone\":\"+91-7073392579\",\n    \"accessType\": 1,\n    \"about\": \"Super admin\",\n    \"photo\":{}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/updateUser/60f2eff732022d1ea15cd0eb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"updateUser",
+						"60f2eff732022d1ea15cd0eb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": " mutation {\n  \tcreatePost(postInput:{ title:\"Test post - 115\" , content:\"frist post with graphQl\", creator:\"60f2eff732022d1ea15cd0eb\", postTo:\"60f2eff732022d1ea15cd0eb\" }),{\n    _id\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/graphql/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/sendResetPassowrdLink",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"shubham.jain05@outlook.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/sendResetPassowrdLink",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"sendResetPassowrdLink"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/resetPassword/bd173dba66e05630fa0d556c627a61a0243f4fbb083681905b39b0938b338735",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\":\"Admin@123\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/resetPassword/bd173dba66e05630fa0d556c627a61a0243f4fbb083681905b39b0938b338735",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"resetPassword",
+						"bd173dba66e05630fa0d556c627a61a0243f4fbb083681905b39b0938b338735"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/addProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"test Product 12\",\n    \"price\": 1200,\n    \"imageUrl\":\"https://www.google.com/image\",\n    \"description\":\"test to api work or not -12 \",\n    \"isAvailable\":true,\n    \"rating\": 5,\n    \"qty\": 10,\n    \"userId\": \"60f2eff732022d1ea15cd0eb\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/addProduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"addProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/fetchAllProduct",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/fetchProduct?page=1&pageSize=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"fetchProduct"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "id",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/fetchProduct/2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/fetchProduct/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"fetchProduct",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/updateProduct/2",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"test Product 15\",\n    \"price\": 500,\n    \"imageUrl\":\"https://www.google.com/image\",\n    \"description\":\"test to api work or not -15\",\n    \"isAvailable\":true,\n    \"rating\": 5,\n    \"qty\": 2,\n    \"userId\": \"60f2eff732022d1ea15cd0eb\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/updateProduct/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"updateProduct",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/deleteProduct/2",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Berror ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9000/deleteProduct/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"deleteProduct",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/uploadImage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/admin/Desktop/1500x500.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9000/uploadImage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"uploadImage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/downloadImage/31_07_2021_03_05_36-1500x500.jpg",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/downloadImage/31_07_2021_03_05_36-1500x500.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"downloadImage",
+						"31_07_2021_03_05_36-1500x500.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/deleteImage/31_07_2021_03_05_36-1500x500.jpg",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/deleteImage/31_07_2021_03_05_36-1500x500.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"deleteImage",
+						"31_07_2021_03_05_36-1500x500.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/genratePdf/mytestpdf1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/genratePdf/mytestpdf5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"genratePdf",
+						"mytestpdf5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reead graphql",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{\n    posts(page:1) {\n      posts{\n        title,\n        _id,\n        content\n      }\n      totalPosts\n    }\n  \n  }",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/graphql/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create post in graphql",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": " mutation {\n  \tcreatePost(postInput:{ title:\"Test post - 115\" , content:\"frist post with graphQl\", creator:\"60f2eff732022d1ea15cd0eb\", postTo:\"60f2eff732022d1ea15cd0eb\" }),{\n    _id\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/graphql/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delepost in graphql",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation{\ndeletePost(id:\"610acb7f54f6193bd4f1c709\") \n  }",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/graphql/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update post graphql",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation{\nupdatePost(id:\"610acb9054f6193bd4f1c70a\", postInput:{\n  title: \" Test post -4 \" , content:\"frist post with graphQl\", creator:\"60f2eff732022d1ea15cd0eb\", postTo:\"60f2eff732022d1ea15cd0eb\"\n}) ,{_id}\n  }",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/graphql/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
