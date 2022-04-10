@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:9000/signUp",
+			"name": "https://basic-node-ts-api.herokuapp.com/signUp",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -22,7 +22,7 @@
 					"raw": "{\n     \"email\":\"shubham.jain05@outlook.com\",\n     \"password\":\"Admin#123\",\n     \"name\": \"Shubham Jain\",\n     \"phone\": \"+918440007759\",\n     \"accessType\": 2\n}"
 				},
 				"url": {
-					"raw": "http://localhost:9000/signUp",
+					"raw": "https://basic-node-ts-api.herokuapp.com/signUp",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -36,7 +36,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/signIn",
+			"name": "https://basic-node-ts-api.herokuapp.com/signIn",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -57,7 +57,7 @@
 					"raw": "{\n    \"email\":\"shubham.jain05@outlook.com\",\n    \"password\":\"Admin@123\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:9000/signIn",
+					"raw": "https://basic-node-ts-api.herokuapp.com/signIn",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -71,7 +71,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/updateUserPassword/60ed5a14a7197b4f3ab14afd",
+			"name": "https://basic-node-ts-api.herokuapp.com/updateUserPassword/60ed5a14a7197b4f3ab14afd",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -86,7 +86,7 @@
 					"raw": "{\n     \"oldPassowrd\":\"Admin@123\",\n     \"newPassword\":\"Admin#123\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:9000/updateUserPassword/60f2eff732022d1ea15cd0eb",
+					"raw": "https://basic-node-ts-api.herokuapp.com/updateUserPassword/60f2eff732022d1ea15cd0eb",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -101,7 +101,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/readUser",
+			"name": "https://basic-node-ts-api.herokuapp.com/readUser",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -112,7 +112,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:9000/readUser?page=1&pageSize=5",
+					"raw": "https://basic-node-ts-api.herokuapp.com/readUser?page=1&pageSize=5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -136,12 +136,12 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/readUser/60f2eff732022d1ea15cd0eb",
+			"name": "https://basic-node-ts-api.herokuapp.com/readUser/60f2eff732022d1ea15cd0eb",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/readUser/60f2eff732022d1ea15cd0eb",
+					"raw": "https://basic-node-ts-api.herokuapp.com/readUser/60f2eff732022d1ea15cd0eb",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -156,12 +156,12 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/userDelete/60ed5a14a7197b4f3ab14afd",
+			"name": "https://basic-node-ts-api.herokuapp.com/userDelete/60ed5a14a7197b4f3ab14afd",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/userDelete/60ed5a14a7197b4f3ab14afd",
+					"raw": "https://basic-node-ts-api.herokuapp.com/userDelete/60ed5a14a7197b4f3ab14afd",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -176,7 +176,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/updateUser/60f2eff732022d1ea15cd0eb",
+			"name": "https://basic-node-ts-api.herokuapp.com/updateUser/60f2eff732022d1ea15cd0eb",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -191,7 +191,7 @@
 					"raw": "{   \n    \"username\": \"shubham.jain05\",\n    \"name\":\"Shubham Jain\",\n    \"email\": \"shubham.jain05@outlook.com\",\n    \"phone\":\"+91-7073392579\",\n    \"accessType\": 1,\n    \"about\": \"Super admin\",\n    \"photo\":{}\n}"
 				},
 				"url": {
-					"raw": "http://localhost:9000/updateUser/60f2eff732022d1ea15cd0eb",
+					"raw": "https://basic-node-ts-api.herokuapp.com/updateUser/60f2eff732022d1ea15cd0eb",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -218,7 +218,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/graphql/",
+					"raw": "https://basic-node-ts-api.herokuapp.com/graphql/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -233,7 +233,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/sendResetPassowrdLink",
+			"name": "https://basic-node-ts-api.herokuapp.com/sendResetPassowrdLink",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -247,7 +247,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/sendResetPassowrdLink",
+					"raw": "https://basic-node-ts-api.herokuapp.com/sendResetPassowrdLink",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -261,7 +261,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/resetPassword/bd173dba66e05630fa0d556c627a61a0243f4fbb083681905b39b0938b338735",
+			"name": "https://basic-node-ts-api.herokuapp.com/resetPassword/bd173dba66e05630fa0d556c627a61a0243f4fbb083681905b39b0938b338735",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -275,7 +275,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/resetPassword/bd173dba66e05630fa0d556c627a61a0243f4fbb083681905b39b0938b338735",
+					"raw": "https://basic-node-ts-api.herokuapp.com/resetPassword/bd173dba66e05630fa0d556c627a61a0243f4fbb083681905b39b0938b338735",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -290,7 +290,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/addProduct",
+			"name": "https://basic-node-ts-api.herokuapp.com/addProduct",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -304,7 +304,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/addProduct",
+					"raw": "https://basic-node-ts-api.herokuapp.com/addProduct",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -318,12 +318,12 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/fetchAllProduct",
+			"name": "https://basic-node-ts-api.herokuapp.com/fetchAllProduct",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/fetchProduct?page=1&pageSize=2",
+					"raw": "https://basic-node-ts-api.herokuapp.com/fetchProduct?page=1&pageSize=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -352,12 +352,12 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/fetchProduct/2",
+			"name": "https://basic-node-ts-api.herokuapp.com/fetchProduct/2",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/fetchProduct/5",
+					"raw": "https://basic-node-ts-api.herokuapp.com/fetchProduct/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -372,7 +372,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/updateProduct/2",
+			"name": "https://basic-node-ts-api.herokuapp.com/updateProduct/2",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -392,7 +392,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/updateProduct/2",
+					"raw": "https://basic-node-ts-api.herokuapp.com/updateProduct/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -407,7 +407,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/deleteProduct/2",
+			"name": "https://basic-node-ts-api.herokuapp.com/deleteProduct/2",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -418,7 +418,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:9000/deleteProduct/2",
+					"raw": "https://basic-node-ts-api.herokuapp.com/deleteProduct/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -433,7 +433,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/uploadImage",
+			"name": "https://basic-node-ts-api.herokuapp.com/uploadImage",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -448,7 +448,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:9000/uploadImage",
+					"raw": "https://basic-node-ts-api.herokuapp.com/uploadImage",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -462,12 +462,12 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/downloadImage/31_07_2021_03_05_36-1500x500.jpg",
+			"name": "https://basic-node-ts-api.herokuapp.com/downloadImage/31_07_2021_03_05_36-1500x500.jpg",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/downloadImage/31_07_2021_03_05_36-1500x500.jpg",
+					"raw": "https://basic-node-ts-api.herokuapp.com/downloadImage/31_07_2021_03_05_36-1500x500.jpg",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -482,12 +482,12 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/deleteImage/31_07_2021_03_05_36-1500x500.jpg",
+			"name": "https://basic-node-ts-api.herokuapp.com/deleteImage/31_07_2021_03_05_36-1500x500.jpg",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/deleteImage/31_07_2021_03_05_36-1500x500.jpg",
+					"raw": "https://basic-node-ts-api.herokuapp.com/deleteImage/31_07_2021_03_05_36-1500x500.jpg",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -502,12 +502,12 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:9000/genratePdf/mytestpdf1",
+			"name": "https://basic-node-ts-api.herokuapp.com/genratePdf/mytestpdf1",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/genratePdf/mytestpdf5",
+					"raw": "https://basic-node-ts-api.herokuapp.com/genratePdf/mytestpdf5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -534,7 +534,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/graphql/",
+					"raw": "https://basic-node-ts-api.herokuapp.com/graphql/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -561,7 +561,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/graphql/",
+					"raw": "https://basic-node-ts-api.herokuapp.com/graphql/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -588,7 +588,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/graphql/",
+					"raw": "https://basic-node-ts-api.herokuapp.com/graphql/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -615,7 +615,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/graphql/",
+					"raw": "https://basic-node-ts-api.herokuapp.com/graphql/",
 					"protocol": "http",
 					"host": [
 						"localhost"
